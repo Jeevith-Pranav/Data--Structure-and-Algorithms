@@ -41,13 +41,13 @@ struct node *createtree()
     return root;
 }
 
-void inorder(struct node *root)
+void preorder(struct node *root)
 {
     if(root != NULL)
     {
         printf("%d",root->data);
-        inorder(root->left);
-        inorder(root->right);
+        preorder(root->left);
+        preorder(root->right);
     }
 }
 
@@ -58,8 +58,6 @@ int main()
     root=createtree();
     
     printf("\nInoreder traversal:");
-    inorder(root);
-    return 0;
-
+    preorder(root);
     return 0;
 }
