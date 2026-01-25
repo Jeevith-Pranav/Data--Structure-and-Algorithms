@@ -12,7 +12,7 @@ struct node
 /* Create new node */
 struct node* createNode(int value)
 {
-    struct node* newnode = (struct node*)malloc(sizeof(struct node));
+    struct node* newnode = malloc(sizeof(struct node));
     newnode->data = value;
     newnode->left = NULL;
     newnode->right = NULL;
