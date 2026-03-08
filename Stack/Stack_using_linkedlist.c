@@ -1,49 +1,91 @@
-//Stack using Linked list
+//Stack Using LinkedList
 #include <stdio.h>
-#define MAX 5
+#include <stdlib.h>
 
-int stack[MAX];
-int top=-1;
+struct node{
+    int data;
+    struct node *next;
+};
 
-int main()
+
+struct node *top = NULL;
+
+
+void push(int val)
 {
-    int n,val;
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data=val;
+    newnode->next=NULL;
     
-    printf("Enter the number of elelemnts (max %d):",MAX);
-    scanf("%d",&n);
     
-    if(n>MAX)
+    if(newnode == NULL)
     {
-        printf("The Stack is Overflow");
-        return 0;
-    }
-    
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d",&stack[i]);
-        top++;
-    }
-    
-    //printf("To Pop the element in stack");
-    if(top == -1)
-    {
-        printf("Stack is under flow");
-        return 0;
+        printf("Memory is not found");
     }
     else
     {
-        printf("\nPopped Element:%d\n",stack[top]);
-        top--;
-    }
-    
-
-    printf("The Stack After the Pop:");
-    if(top == -1)
-    {
-    printf("The Stack is empty");
-    }
-    for(int i=top;i>=0;i--)
-    {
-        printf("%d ",stack[i]);
+        if(top == NULL)
+        {
+            top=newnode;
+        }
+        else
+        {
+            newnode->next=top;
+            top = newnode;
+        }
     }
 }
+
+void display()
+{
+    struct node *temp=top;
+    
+    while(temp!= NULL)
+    {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+}
+
+
+void pop()
+{
+    struct node *temp = top;
+    if(top == NULL)
+    {
+        printf("Stack is underflow");
+    }
+    else
+    {
+        if(top -> next == NULL)
+        {
+            top=NULL;
+            free(top);
+        }
+        else
+        {
+            top=top->next;
+            free(temp);
+        }
+    }
+}
+
+int main()
+{
+    int val;
+    while(1)
+    {
+        scanf("%d",&val);
+        if(val == -1)
+        break;
+        
+        push(val);
+    }
+    display();
+    printf("Pop the top element %d\n",top->data);
+    pop();
+    
+    printf("Elements after pop\n");
+    display();
+}
+
